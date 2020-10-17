@@ -23,8 +23,7 @@ def createroom(request):
         return HttpResponse('false')
     else:
         clientip = request.META.get('HTTP_X_FORWARDED_FOR')
-        room = Room.objects.create(
-            user=request.user, name=newroom, ipaddress=clientip)
+        room = Room.objects.create(user=request.user, name=newroom, ipaddress=clientip)
         return HttpResponse('true')
 
 def activeroom(request, room_name):
@@ -44,7 +43,8 @@ def Post(request):
         msg = request.POST.get('msgbox', None)
         room_key = request.POST.get('room_data', None)
         print(request.POST.get('room_data', None))
-        c = Message.objects.create(user=request.user, messages=msg, name=room_key)
+        clientip = request.META.get('HTTP_X_FORWARDED_FOR')
+        c = Message.objects.create(user=request.user, messages=msg, name=room_key, ipaddress=clientip)
         print(c.user)
         if msg != '':
             c.save()
