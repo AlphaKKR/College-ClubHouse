@@ -1,13 +1,18 @@
 from django.shortcuts import render, redirect
 from accounts.models import UserAccount
 from django.contrib.auth import logout, login, authenticate
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
+from resources.models import *
+from clubs.models import ClubAccount
+from chatapp.models import Room
+from django.db.models import Q, FilteredRelation
 
 
-def index(request):
+def index(request): 
     if request.user.is_anonymous:
         return render(request, 'homepage/index.html', {'form_action': 'login', 'button_name': 'Login'})
     else:
+        # print(CAT1.objects.filter(course_code='cse1002'))
         return render(request, 'homepage/index.html', {'form_action': 'profile', 'button_name': 'Profile'})
 
 def Profile(request):
@@ -52,4 +57,41 @@ def Profile(request):
 
     else: 
         return redirect('/accounts/login')
+
   
+
+def search(request): 
+    if 'term' in request.GET:   
+        qs_subject_cat1 = CAT1.objects.filter(subject__istartswith=request.GET.get('term'))
+        qs_course_cat1 = CAT1.objects.filter(course_code__istartswith=request.GET.get('term'))
+        qs_subject_cat2 = CAT2.objects.filter(subject__istartswith=request.GET.get('term'))
+        qs_course_cat2 = CAT2.objects.filter(course_code__istartswith=request.GET.get('term'))
+        qs_subject_fat = FAT.objects.filter(subject__istartswith=request.GET.get('term'))
+        qs_course_fat = FAT.objects.filter(course_code__istartswith=request.GET.get('term'))
+        qs_clubs = ClubAccount.objects.filter(club_name__istartswith=request.GET.get('term'))
+        qs_chatrooms = Room.objects.filter(name__istartswith=request.GET.get('term'))
+
+        queries_cat1 = qs_subject_cat1 | qs_course_cat1
+        queries_cat2 = qs_subject_cat2 | qs_course_cat2
+        queries_fat = qs_subject_fat | qs_course_fat
+        queries = list()
+
+        for query in queries_cat1:
+            queries.append(query.subject)
+            queries.append(query.course_code)
+        
+        for query in queries_cat2:
+            queries.append(query.subject)
+            queries.append(query.course_code)
+
+        for query in queries_fat:
+            queries.append(query.subject)
+            queries.append(query.course_code)
+
+        for query in qs_clubs:
+            queries.append(query.club_name)
+
+        for query in qs_chatrooms:
+            queries.append(query.name)
+
+        return JsonResponse(queries, safe=False)

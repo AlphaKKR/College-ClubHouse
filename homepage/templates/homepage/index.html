@@ -9,10 +9,32 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
         integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
-
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <title>Hello, world!</title>
 
     <style>
+        .ui-autocomplete {
+            position: absolute;
+            top: 0;
+            left: 0;
+            cursor: default;
+            /* border-bottom-left-radius: 8px; */
+            border-radius: 10px;
+        }
+
+        .ui-state-active,
+        .ui-widget-content .ui-state-active,
+        .ui-widget-header .ui-state-active,
+        a.ui-button:active,
+        .ui-button:active,
+        .ui-button.ui-state-active:hover {
+            border: 1px solid #003eff;
+            background: #007fff;
+            font-weight: normal;
+            color: #ffffff;
+            border-radius: 8px;
+        }
+
         .dropdown:hover .dropdown-menu {
             display: block;
             margin-top: 0px;
@@ -29,32 +51,38 @@
         .srround {
             border-radius: 10px;
         }
-        #searchinput{ 
-            width:30vw;
-            height:42px;
-            
+
+        #searchinput {
+            width: 30vw;
+            height: 42px;
+
         }
+
         @media only screen and (max-width:600px) {
-            #searchinput{ 
-            width : 75vw;
-        }
-            #searchbutton{
-                margin-left:auto;
-                margin-top:5px;
+            #searchinput {
+                width: 75vw;
+            }
+
+            #searchbutton {
+                margin-left: auto;
+                margin-top: 5px;
             }
         }
-        #searchbutton{
-            height:42px;
-            float:right;
+
+        #searchbutton {
+            height: 42px;
+            float: right;
         }
-        @media only screen and (max-width:1200px){
-            #searchinput{
-            width:60vw;
+
+        @media only screen and (max-width:1200px) {
+            #searchinput {
+                width: 60vw;
             }
         }
-        
     </style>
 </head>
+
+
 
 <body>
 
@@ -89,7 +117,8 @@
             </ul>
             <form action="/accounts/{{form_action}}/">
                 <div>
-                    <button class="srround btn btn-primary mr-2 mt-2" type="submit" id='{{form_action}}'>{{button_name}}</button>
+                    <button class="srround btn btn-primary mr-2 mt-2" type="submit"
+                        id='{{form_action}}'>{{button_name}}</button>
                 </div>
             </form>
             <form action="/signup/">
@@ -108,11 +137,13 @@
         <div class='row' style='width:100%'>
             <div style='margin:auto'>
                 <span>
-                <input class="srround form-control mr-sm-2 " id='searchinput' type="search" style='margin-right:0px' placeholder="Search" aria-label="Search">
-            </span>
-            <span>
-                <button class="srround btn btn-outline-info my-sm-0 " id='searchbutton'  type="submit">Search</button>
-            </span>
+                    <input class="srround form-control mr-sm-2 " id='searchinput' type="search" style='margin-right:0px'
+                        placeholder="Search" aria-label="Search">
+                </span>
+                <span>
+                    <button class="srround btn btn-outline-info my-sm-0 " id='searchbutton'
+                        type="submit">Search</button>
+                </span>
             </div>
         </div>
     </form><br>
@@ -134,10 +165,22 @@
         integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
         crossorigin="anonymous"></script>
 
-        <script>
-            if('{{form_action}}' == 'profile'){
-                $('#signup').hide();
-            }
-        </script>
+    <script>
+        if ('{{form_action}}' == 'profile') {
+            $('#signup').hide();
+        }
+    </script>
+
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+    <script>
+        $(function () {
+            $("#searchinput").autocomplete({
+                source: '{% url "search" %}'
+            });
+        });
+    </script>
 </body>
+
 </html>
