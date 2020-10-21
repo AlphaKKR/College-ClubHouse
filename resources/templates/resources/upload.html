@@ -8,10 +8,10 @@
 </head>
 
 <body>
-    {% load static %}
-
     <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
+        <h2>Subject</h2><input type="text">
+        <h2>Course code</h2><input type="text">
         <input type="file" name="myfile">
         <button type="submit">Upload</button>
     </form>
@@ -21,7 +21,6 @@
     {% endif %}
 
     <p><a href="{% url 'index' %}">Return to home</a></p>
-    {% endblock %}
 </body>
 
 </html>

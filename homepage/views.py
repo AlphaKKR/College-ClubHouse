@@ -77,16 +77,16 @@ def search(request):
         queries = list()
 
         for query in queries_cat1:
-            queries.append(query.subject)
-            queries.append(query.course_code)
+            queries.append(query.subject + ' CAT 1 papers')
+            queries.append(query.course_code + ' CAT 1 papers')
         
         for query in queries_cat2:
-            queries.append(query.subject)
-            queries.append(query.course_code)
+            queries.append(query.subject + ' CAT 2 papers')
+            queries.append(query.course_code + ' CAT 2 papers')
 
         for query in queries_fat:
-            queries.append(query.subject)
-            queries.append(query.course_code)
+            queries.append(query.subject + ' FAT papers')
+            queries.append(query.course_code + ' FAT papers')
 
         for query in qs_clubs:
             queries.append(query.club_name)
