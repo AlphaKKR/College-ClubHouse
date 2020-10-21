@@ -1,6 +1,5 @@
 import os
-# import django_heroku
-
+import django_heroku
 
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -16,8 +15,7 @@ SECRET_KEY = '5yj!l)qmj@#yuf2r505$r7s#o2y#nn24*%x_bvi^30pp7tqjeb'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-# ALLOWED_HOSTS = ['alphakkrdevs.heroku.com']
-ALLOWED_HOSTS = ['localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'alphakkrdevs.heroku.com']
 
 
 # Application definition
@@ -35,6 +33,9 @@ INSTALLED_APPS = [
     'allauth.account',
     'allauth.socialaccount',
     'allauth.socialaccount.providers.google',
+
+    #heroku apps
+    # 'whitenoise.runserver_nostatic',
 
     #django apps
     'django.contrib.sites',
@@ -55,6 +56,10 @@ AUTHENTICATION_BACKENDS = [
 ]
 
 MIDDLEWARE = [
+    #heroku 
+    # 'whitenoise.middleware.WhiteNoiseMiddleware',
+
+    #django
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -63,6 +68,8 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 ROOT_URLCONF = 'AlphaKKR.urls'
 
@@ -123,6 +130,11 @@ DATABASES = {
     }
 }
 
+import dj_database_url
+
+db_from_env = dj_database_url.config(conn_max_age=600)
+DATABASES['default'].update(db_from_env)
+
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
 
@@ -175,4 +187,4 @@ SITE_ID = 1
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
-# django_heroku.settings(locals())
+django_heroku.settings(locals())
