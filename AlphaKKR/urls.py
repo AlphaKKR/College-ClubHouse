@@ -2,6 +2,9 @@ from django.contrib import admin
 from django.urls import path, include
 from homepage.views import Profile
 from chatapp.views import createroom
+from django.conf import settings
+from django.conf.urls.static import static
+
 
 
 urlpatterns = [
@@ -14,3 +17,5 @@ urlpatterns = [
     path('chatroom/', include('chatapp.urls')),
     path('createroom/', createroom, name='createroom')
 ]
+
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

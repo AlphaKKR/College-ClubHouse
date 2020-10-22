@@ -8,3 +8,5 @@ urlpatterns = [
     path('messages', views.Messages, name='messages'),
     path('post', views.Post, name='post'),
 ]
+
+

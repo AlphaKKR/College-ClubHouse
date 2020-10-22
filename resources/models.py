@@ -1,77 +1,84 @@
 from django.db import models
 import os
+from django.db.models.signals import post_delete
+from django.dispatch import receiver
 
 def path_and_rename_cat1(instance, filename):
     upload_to = 'papers/cat1'
     ext = filename.split('.')[-1]
-    if instance.pk:
-        filename = '{}_{}.{}'.format(instance.pk, 'cat1', ext)
+    filename = '{} {} {}.{}'.format(instance.course, instance.date, 'cat1', ext)
 
     return os.path.join(upload_to, filename)
 
 def path_and_rename_cat2(instance, filename):
     upload_to = 'papers/cat2'
     ext = filename.split('.')[-1]
-    if instance.pk:
-        filename = '{}_{}.{}'.format(instance.pk, 'cat2', ext)
+    filename = '{} {} {}.{}'.format(instance.course, instance.id, 'cat2', ext)
 
     return os.path.join(upload_to, filename)
 
 def path_and_rename_fat(instance, filename):
     upload_to = 'papers/fat'
     ext = filename.split('.')[-1]
-    if instance.pk:
-        filename = '{}_{}.{}'.format(instance.pk, 'fat', ext)
+    filename = '{} {} {}.{}'.format(instance.course, instance.id, 'fat', ext)
 
     return os.path.join(upload_to, filename)
 
-class CAT1(models.Model):
+class Subject(models.Model):
     course_code     = models.CharField(null=False, default='', max_length=200, primary_key=True)
     subject         = models.CharField(null=True, default='', max_length=200)
-    cat_1           = models.FileField(upload_to=path_and_rename_cat1, default='', null=True)
-    date            = models.DateTimeField(auto_now_add=True, null=True, editable=True)
-
-    def delete(self, using=None, keep_parents=False):
-        self.cat_1.storage.delete(self.cat_1.name)
-        super().delete()
+    date            = models.DateTimeField(auto_now_add=True, null=True)
     
     def __str__(self):
         return self.course_code
 
+
+class CAT1files(models.Model):
+    course          = models.ForeignKey(Subject, on_delete=models.CASCADE, null=True)
+    cat_1           = models.FileField(upload_to=path_and_rename_cat1, default='', null=True)
+    date            = models.DateTimeField(auto_now_add=True, null=True)
+   
+    def __str__(self):
+        return str(self.course) + ' Sub id: ' + str(self.id)
+    
     class Meta:
-        verbose_name = 'CAT 1 Paper'
-        verbose_name_plural = 'CAT 1 papers'
+        verbose_name = 'CAT 1 File'
+        verbose_name_plural = 'CAT 1 Files'
 
-class CAT2(models.Model):
-    course_code     = models.CharField(null=False, default='', max_length=200, primary_key=True)
-    subject         = models.CharField(null=True, default='', max_length=200)
+@receiver(post_delete, sender=CAT1files)
+def submission_delete_cat1(sender, instance, **kwargs):
+    instance.cat_1.delete(False)
+
+class CAT2files(models.Model):
+    course          = models.ForeignKey(Subject, on_delete=models.CASCADE, null=True)
     cat_2           = models.FileField(upload_to=path_and_rename_cat2, default='', null=True)
-    date            = models.DateTimeField(auto_now_add=True, null=True, editable=True)
-
-    def delete(self, using=None, keep_parents=False):
-        self.cat_2.storage.delete(self.cat_2.name)
-        super().delete()
+    date            = models.DateTimeField(auto_now_add=True, null=True)
 
     def __str__(self):
-        return self.course_code
+        return str(self.course) + ' Sub id: ' + str(self.id)
 
     class Meta:
-        verbose_name = 'CAT 2 Paper'
-        verbose_name_plural = 'CAT 2 papers'
+        verbose_name = 'CAT 2 File'
+        verbose_name_plural = 'CAT 2 Files'
 
-class FAT(models.Model):
-    course_code     = models.CharField(null=False, default='', max_length=200, primary_key=True)
-    subject         = models.CharField(null=True, default='', max_length=200)
+@receiver(post_delete, sender=CAT2files)
+def submission_delete_cat2(sender, instance, **kwargs):
+    instance.cat_2.delete(False)
+
+class FATfiles(models.Model):
+    course          = models.ForeignKey(Subject, on_delete=models.CASCADE, null=True)    
     fat_paper       = models.FileField(upload_to=path_and_rename_fat, default='', null=True)
     date            = models.DateTimeField(auto_now_add=True, null=True, editable=True)
 
-    def delete(self, using=None, keep_parents=False):
-        self.fat_paper.storage.delete(self.fat_paper.name)
-        super().delete()
+
 
     def __str__(self):
-        return self.course_code
+        return str(self.course) + ' Sub id: ' + str(self.id)
 
     class Meta:
-        verbose_name = 'FAT Paper'
-        verbose_name_plural = 'FAT Papers'
+        verbose_name = 'FAT File'
+        verbose_name_plural = 'FAT Files'
+
+@receiver(post_delete, sender=FATfiles)
+def submission_delete_fat(sender, instance, **kwargs):
+    instance.fat_paper.delete(False)

@@ -1,6 +1,6 @@
 from django.db import models
-from django.db.models.functions import Cast
 import os
+
 
 def path_and_rename_logos(instance, filename):
     upload_to = 'clubs/logos'
@@ -27,18 +27,16 @@ def path_and_rename_recs(instance, filename):
         return os.path.join(upload_to, filename)
 
 
-
 class ClubAccount(models.Model):
     club_name       = models.CharField(null=False, default='', max_length=1000, primary_key=True)
     club_website    = models.URLField(null=True)
     ig_url          = models.URLField(null=True)
     club_email      = models.EmailField(null=True, unique=True)
     club_logo       = models.ImageField(upload_to=path_and_rename_logos, default='', null=True)
-
+    
     def delete(self, using=None, keep_parents=False):
         self.club_logo.storage.delete(self.club_logo.name)
         super().delete()
-
 
     def __str__(self):
         return self.club_name
@@ -57,6 +55,7 @@ class ClubEvent(models.Model):
         self.event_poster.storage.delete(self.event_poster.name)
         super().delete()
 
+    
 
 class ClubBigEvent(models.Model):
     club_name       = models.ForeignKey(ClubAccount, on_delete=models.CASCADE, null=True)
