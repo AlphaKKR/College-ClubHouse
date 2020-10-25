@@ -14,7 +14,7 @@ def upload(request):
             instance.save()
             print('sub doesnt exist')
             url = instance.cat_1.url
-            instance = CAT1files.objects.update(urlfield=url)
+            instance = CAT1files.objects.update(cat_1_url=url)
             
             return render(request, 'resources/upload.html', {
                 'uploaded_file_url': url
@@ -26,7 +26,7 @@ def upload(request):
             instance = CAT1files(course=sub1,  cat_1=request.FILES['myfile'])
             instance.save()
             url = instance.cat_1.url
-            instance = CAT1files.objects.update(urlfield=url)
+            instance = CAT1files.objects.update(cat_1_url=url)
             
             return render(request, 'resources/upload.html', {
                 'uploaded_file_url': url
