@@ -34,8 +34,8 @@ INSTALLED_APPS = [
     'allauth.socialaccount',
     'allauth.socialaccount.providers.google',
 
-    #heroku apps
-    # 'whitenoise.runserver_nostatic',
+    #google api
+    'gdstorage',
 
     #django apps
     'django.contrib.sites',
@@ -46,6 +46,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 ]
+
+GOOGLE_DRIVE_STORAGE_JSON_KEY_FILE = os.path.join(BASE_DIR, "api keys", "alpha-client.json")
+GOOGLE_DRIVE_STORAGE_MEDIA_ROOT = "/Alpha Site/"
 
 AUTHENTICATION_BACKENDS = [
     # Needed to login by username in Django admin, regardless of `allauth`
