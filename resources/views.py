@@ -7,12 +7,12 @@ def index(request):
 
 def upload(request):
     if request.method == 'POST':
-        if Subject.objects.filter(course_code=request.POST['course'])==None:
+        if not Subject.objects.filter(course_code=request.POST['course']).exists():
             sub = Subject(subject=request.POST['subject'], course_code=request.POST['course'])
             sub.save()
             instance = CAT1files(course=sub,  cat_1=request.FILES['myfile'])
             instance.save()
-            print('sub doesnt exist')
+            print(instance.date)
             url = instance.cat_1.url
             instance = CAT1files.objects.update(cat_1_url=url)
             
@@ -20,8 +20,6 @@ def upload(request):
                 'uploaded_file_url': url
             })
         else:
-            print('sub exists')
-
             sub1 = Subject.objects.get(course_code=request.POST['course'])
             instance = CAT1files(course=sub1,  cat_1=request.FILES['myfile'])
             instance.save()
