@@ -14,21 +14,21 @@ gd_storage = GoogleDriveStorage()
 def path_and_rename_cat1(instance, filename):
     upload_to = 'cat1/'
     ext = filename.split('.')[-1]
-    filename = '{} {} {}.{}'.format(instance.course, instance.id, 'cat1', ext)
+    filename = '{} {}.{}'.format(instance.course, 'cat1', ext)
 
     return os.path.join(upload_to, filename)
 
 def path_and_rename_cat2(instance, filename):
     upload_to = 'cat2/'
     ext = filename.split('.')[-1]
-    filename = '{} {} {}.{}'.format(instance.course, instance.id, 'cat2', ext)
+    filename = '{} {}.{}'.format(instance.course, 'cat2', ext)
 
     return os.path.join(upload_to, filename)
 
 def path_and_rename_fat(instance, filename):
     upload_to = 'fat/'
     ext = filename.split('.')[-1]
-    filename = '{} {} {}.{}'.format(instance.course, instance.id, 'fat', ext)
+    filename = '{} {}.{}'.format(instance.course, 'fat', ext)
 
     return os.path.join(upload_to, filename)
 
