@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <form method="post" enctype="multipart/form-data" action="uploadcat1">
+        {% csrf_token %}
+        <h2>Subject</h2><input type="text" name="subject"> 
+        <h2>Course code</h2><input type="text" name="course">
+        <input type="file" name="myfile">
+        <button type="submit">Upload</button>
+    </form>
+
+    {% if uploaded_file_url %}
+    <p>File uploaded at: <a href="{{ uploaded_file_url }}">{{ uploaded_file_url }}</a></p>
+    {% endif %}
+
+    <p><a href="{% url 'index' %}">Return to home</a></p>
+</body>
+
+</html>

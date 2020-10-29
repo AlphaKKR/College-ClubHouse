@@ -32,13 +32,26 @@ def path_and_rename_fat(instance, filename):
 
     return os.path.join(upload_to, filename)
 
+def path_and_rename_syllabus(instance, filename):
+    upload_to = 'syllabus/'
+    ext = filename.split('.')[-1]
+    filename = '{} {}.{}'.format(instance.course_code, 'syll', ext)
+
+    return os.path.join(upload_to, filename)
+
 class Subject(models.Model):
     course_code     = models.CharField(null=False, default='', max_length=200, primary_key=True)
     subject         = models.CharField(null=True, default='', max_length=200)
     date            = models.DateTimeField(auto_now_add=True, null=True)
-    
+    syll_file       = models.FileField(upload_to=path_and_rename_syllabus, default='', null=True, storage=gd_storage)
+    syll_url        = models.URLField(default='', null=True, blank=True)
+
     def __str__(self):
         return self.course_code
+
+@receiver(post_delete, sender=Subject)
+def submission_delete_syll(sender, instance, **kwargs):
+    instance.syll_file.delete(False)
 
 
 class CAT1files(models.Model):
