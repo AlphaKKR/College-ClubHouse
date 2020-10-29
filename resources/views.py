@@ -1,10 +1,24 @@
 from django.shortcuts import render, redirect
+from django.http import JsonResponse
 from django.conf import settings
 from .models import *
 
 def index(request):
     return render(request, 'resources/index.html')
 
+def search(request): 
+    if 'term' in request.GET:   
+        qs_subject = Subject.objects.filter(subject__icontains=request.GET.get('term'))
+        qs_course  = Subject.objects.filter(course_code__icontains=request.GET.get('term'))
+
+        queries_ = qs_subject | qs_course
+        queries = list()
+
+        for query in queries_:
+            queries.append(query.subject)
+            queries.append(query.course_code)
+
+        return JsonResponse(queries, safe=False)
 
 def uploadSyllabus(request):
     if request.method == 'POST':
@@ -19,7 +33,6 @@ def uploadSyllabus(request):
 
 
     return render(request, 'resources/syllabus.html')
-
 
 def uploadCAT1(request):
     if request.method == 'POST':

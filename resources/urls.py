@@ -8,4 +8,5 @@ urlpatterns = [
     path('uploadfat', views.uploadFAT, name='uploadfat'),
     path('uploadsyll', views.uploadSyllabus, name='uploadsyll'),
     path('', views.index, name='index'),
+    path('search/', views.search, name='search'),
 ]
