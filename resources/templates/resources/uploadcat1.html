@@ -12,7 +12,7 @@
 <body>
     <form method="post" enctype="multipart/form-data" action="uploadcat1">
         {% csrf_token %}
-        <h2>Subject</h2><input type="text" name="subject" id="search"> 
+        <h2>Subject</h2><input type="text" name="subject" id="search">
         <h2>Course code</h2><input type="text" name="course" id="search1">
         <input type="file" name="myfile">
         <button type="submit">Upload</button>
@@ -22,19 +22,22 @@
     <p>File uploaded at: <a href="{{ uploaded_file_url }}">{{ uploaded_file_url }}</a></p>
     {% endif %}
 
-    <p><a href="{% url 'index' %}">Return to home</a></p>
+    <p><a href=/">Return to home</a></p>
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script>
+
         $(function () {
             $("#search").autocomplete({
-                source: '{% url "search" %}'
+                source: '{% url "search" %}',
+                autoFocus: true
             });
         });
 
         $(function () {
             $("#search1").autocomplete({
-                source: '{% url "search" %}'
+                source: '{% url "search" %}',
+                autoFocus: true
             });
         });
     </script>

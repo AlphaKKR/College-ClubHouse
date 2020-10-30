@@ -29,13 +29,15 @@
     <script>
         $(function () {
             $("#search").autocomplete({
-                source: '{% url "search" %}'
+                source: '{% url "search" %}',
+                autoFocus: true
             });
         });
 
         $(function () {
             $("#search1").autocomplete({
-                source: '{% url "search" %}'
+                source: '{% url "search" %}',
+                autoFocus: true
             });
         });
     </script>

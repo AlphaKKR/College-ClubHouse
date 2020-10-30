@@ -11,12 +11,16 @@ def search(request):
         qs_subject = Subject.objects.filter(subject__icontains=request.GET.get('term'))
         qs_course  = Subject.objects.filter(course_code__icontains=request.GET.get('term'))
 
-        queries_ = qs_subject | qs_course
         queries = list()
-
-        for query in queries_:
+        for query in qs_subject:
             queries.append(query.subject)
             queries.append(query.course_code)
+
+        for query in qs_course:
+            queries.append(query.subject)
+            queries.append(query.course_code)
+        
+        print(queries)
 
         return JsonResponse(queries, safe=False)
 
