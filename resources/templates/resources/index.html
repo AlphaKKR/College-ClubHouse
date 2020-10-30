@@ -2,18 +2,181 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Resources
-    </title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+        integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <title>Resources</title>
+
+    <style>
+        .ui-autocomplete {
+            position: absolute;
+            top: 0;
+            left: 0;
+            cursor: default;
+            /* border-bottom-left-radius: 8px; */
+            border-radius: 10px;
+        }
+
+        .ui-state-active,
+        .ui-widget-content .ui-state-active,
+        .ui-widget-header .ui-state-active,
+        a.ui-button:active,
+        .ui-button:active,
+        .ui-button.ui-state-active:hover {
+            border: 1px solid #003eff;
+            background: #007fff;
+            font-weight: normal;
+            color: #ffffff;
+            border-radius: 8px;
+        }
+
+        .dropdown:hover .dropdown-menu {
+            display: block;
+            margin-top: 0px;
+        }
+
+        .collapse {
+            transition-delay: 1s;
+        }
+
+        .navbar-toggler {
+            border-radius: 10px;
+        }
+
+        .srround {
+            border-radius: 10px;
+        }
+
+        #searchinput {
+            width: 30vw;
+            height: 42px;
+
+        }
+
+        @media only screen and (max-width:600px) {
+            #searchinput {
+                width: 75vw;
+            }
+
+            #searchbutton {
+                margin-left: auto;
+                margin-top: 5px;
+            }
+        }
+
+        #searchbutton {
+            height: 42px;
+            float: right;
+        }
+
+        @media only screen and (max-width:1200px) {
+            #searchinput {
+                width: 60vw;
+            }
+        }
+
+
+        .news {
+            border: solid black 1px;
+            border-radius: 8px;
+            background: #cdcfd2;
+            box-shadow: 1px 3px #888888;
+
+        }
+
+        .lis {
+            border: solid grey 1px;
+            margin: 1px 4px 1px 4px;
+            padding-left: 3px;
+            font-size: 25px;
+        }
+    </style>
 </head>
 
 <body>
-    <h1>Resources uploads:</h1>
-    <a href="uploadsyll">Upload syllabus</a><br><br>
-    <a href="uploadcat1">CAT 1 Files Upload</a><br><br>
-    <a href="uploadcat2">CAT 2 Files Upload</a><br><br>
-    <a href="uploadfat">FAT Files Upload</a><br><br>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top">
+        <a class=" navbar-brand" href="/">SITE NAME</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Clubs and Chapters
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="/clubs">Club Info</a>
+                        <a class="dropdown-item" href="/clubs/events">Events</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="/clubs/recruitments/">Recruitments</a>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/resources/">Resources</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/chatroom/">Chatroom</a>
+                </li>
+
+            </ul>
+        </div>
+
+        </div>
+    </nav>
+    <h1>Resources Uploads:</h1>
+    <div class="lis">
+        <a href="uploadsyll">Upload syllabus</a><br><br>
+    </div>
+    <div class="lis">
+        <a href="uploadcat1">CAT 1 Files Upload</a><br><br>
+
+    </div>
+    <div class="lis">
+        <a href="uploadcat2">CAT 2 Files Upload</a><br><br>
+
+    </div>
+    <div class="lis">
+        <a href="uploadfat">FAT Files Upload</a><br><br>
+
+    </div>
+
+    <h1>Resources Downloads:</h1>
+    {% for i in objects1 %}
+
+    <a href="{{i.syll_url}}" style='font-size:25px'>{{i.subject}}</a>
+
+    {% for j in objects2 %}
+    <!-- <h4>{{j.course}},    {{i.course_code}}</h4> -->
+    {% if j.course == i %}
+    <br> &#8287 &#8287 &#8287 &#8287 &#8287 &#8287 &#8287 &#8287
+    <a href="{{j.cat_1_url}}" style='font-size:25px'>CAT 1</a>
+    {% endif %}
+    {% endfor %}
+
+    {% for k in objects3 %}
+    <br> &#8287 &#8287 &#8287 &#8287 &#8287 &#8287 &#8287 &#8287
+    {% if k.course == i %}
+    <a href="{{k.cat_2_url}}" style='font-size:25px'>CAT 2</a>
+    {% endif %}
+    {% endfor %}
+
+    {% for l in objects4 %}
+    {% if l.course == i %}
+    <br> &#8287 &#8287 &#8287 &#8287 &#8287 &#8287 &#8287 &#8287
+    <a href="{{l.fat_url}}" style='font-size:25px'>FAT</a>
+    {% endif %}
+    {% endfor %}
+    <br><br>
+    {% endfor %}
 </body>
 
 </html>

@@ -4,7 +4,13 @@ from django.conf import settings
 from .models import *
 
 def index(request):
-    return render(request, 'resources/index.html')
+    objects1 = Subject.objects.all()
+    objects2 = CAT1files.objects.all()
+    objects3 = CAT2files.objects.all()
+    objects4 = FATfiles.objects.all()
+    param = {'objects1':objects1, 'objects2':objects2, 'objects3': objects3, 'objects4': objects4}
+    return render(request, 'resources/index.html',param)
+
 
 def search(request): 
     if 'term' in request.GET:   
