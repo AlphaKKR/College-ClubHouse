@@ -1,18 +1,21 @@
 from django.shortcuts import render, redirect
 from accounts.models import UserAccount
 from django.contrib.auth import login, logout, authenticate
-from clubs.models import ClubAccount
+from clubs.models import *
 from django.http import HttpResponse
 
 
 def index(request):
     return render(request, 'clubs/index.html')
 
-def events(request):
-    return render(request, 'clubs/events.html')
-
 def recruitments(request):
     return render(request, 'clubs/recruitments.html')
+
+def events(request):
+    instance = ClubEvent.objects.all()
+    param = {'objects': instance}
+    print(instance)
+    return render(request, 'clubs/events.html',param)
 
 def Login(request):
     if request.method == 'POST':
