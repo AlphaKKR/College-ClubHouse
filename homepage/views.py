@@ -22,6 +22,7 @@ def Profile(request):
             'username': request.user.username,
             'email': request.user.email,
         }
+    print(request.user.username)
     if not request.user.is_anonymous:
         if request.method == 'POST':
             time_table = request.POST.get('timetable')

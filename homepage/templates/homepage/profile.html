@@ -10,14 +10,28 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
         integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 
-    <title>Hello, world!</title>
+    <title>Profile</title>
 </head>
 
 <body>
+    <div class='container'>
     <h1>{{username}}</h1>
 
-    <div class="container">
-        <li>Name : {{firstname}} {{lastname}}</li>
+    <table class="table">
+        <tr>
+            <th scope = 'col'>Name: {{firstname}} {{lastname}}</th>
+        </tr>
+        <tr>
+            <th scope = 'col'>Username : {{username}}</th>
+        </tr>
+         <tr>
+            <th scope = 'col'>Email : {{email}}</th>
+        </tr>
+        <tr>
+            <th scope = 'col'>{{timetable}}</th>
+        </tr>
+        
+        <!-- <li>Name : {{firstname}} {{lastname}}</li>
         <li>Username : {{username}}</li>
         <li>Email : {{email}}</li>
         <li>{{timetable}}</li>
@@ -30,9 +44,18 @@
                 <label for="timetable">TimeTable</label><br>
                 <button class="btn btn-primary" type='submit'>Submit</button>
             </div>
-        </form>
-    </div>
-
+        </form> -->
+    </table>
+    <form action="/accounts/profile" id='submit_tt' method="post" >
+        {% csrf_token %}
+        <div class="form-label-group">
+            <input autocomplete='chrome-off' type="text" id="timetable" name='timetable' class="form-control"
+                placeholder="TimeTable" required autofocus>
+            <br>
+            <button class="btn btn-primary" type='submit'>Submit</button>
+        </div>
+    </form>
+</div>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
