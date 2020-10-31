@@ -6,15 +6,18 @@ from django.http import HttpResponse
 
 
 def index(request):
-    return render(request, 'clubs/index.html')
+    instance = ClubAccount.objects.all()
+    param = {'objects': instance}
+    return render(request, 'clubs/index.html',param)
 
 def recruitments(request):
-    return render(request, 'clubs/recruitments.html')
+    instance = Recruitment.objects.all()
+    param = {'objects': instance}
+    return render(request, 'clubs/recruitments.html',param)
 
 def events(request):
     instance = ClubEvent.objects.all()
     param = {'objects': instance}
-    print(instance)
     return render(request, 'clubs/events.html',param)
 
 def Login(request):
