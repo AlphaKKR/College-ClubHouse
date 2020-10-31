@@ -3,12 +3,15 @@
 {% load i18n %}
 {% load account socialaccount %}
 
-{% block head_title %}{% trans "Sign In" %}{% endblock %}
+{% block head_title %}
+{% trans "Sign In" %}{% endblock %}
 
+{% block extra_head %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+{% endblock %}
 {% block content %}
-
 <h1>{% trans "Sign In" %}</h1>
-
 {% get_providers as socialaccount_providers %}
 
 {% if socialaccount_providers %}
@@ -18,15 +21,14 @@ for a {{ site_name }} account and sign in below:{% endblocktrans %}</p>
 
 <div class="socialaccount_ballot">
   <h1>Login Page All Auth</h1>
-
+<!-- 
   <ul class="socialaccount_providers">
     {% include "socialaccount/snippets/provider_list.html" with process="login" %}
-  </ul>
+  </ul> -->
 
-  <div class="login-or">{% trans 'or' %}</div>
+  <!-- <div class="login-or">{% trans 'or' %}</div> -->
 
 </div>
-
 {% include "socialaccount/snippets/login_extra.html" %}
 
 {% else %}
@@ -40,8 +42,21 @@ for a {{ site_name }} account and sign in below:{% endblocktrans %}</p>
   {% if redirect_field_value %}
   <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
   {% endif %}
+  <button class="primaryAction waves-effect waves-light btn-small" type="submit">{% trans "Sign In" %}</button>
+  <br>
+  <br>
   <a class="button secondaryAction" href="{% url 'account_reset_password' %}">{% trans "Forgot Password?" %}</a>
-  <button class="primaryAction" type="submit">{% trans "Sign In" %}</button>
 </form>
+
+<div class="col s12 m6 offset-m3 center-align">
+  <a class="oauth-container btn darken-4 white black-text" href="http://127.0.0.1:8000/accounts/google/login/?process=login" style="text-transform:none">
+      <div class="left">
+          <img width="20px" style="margin-top:7px; margin-right:8px" alt="Google sign-in" 
+              src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/512px-Google_%22G%22_Logo.svg.png" />
+      </div>
+      Login with Google
+  </a>
+</div>
+
 
 {% endblock %}

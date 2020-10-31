@@ -6,6 +6,7 @@
     {% endblock %}
   </head>
   <body>
+    <div class="container">
     {% block body %}
 
     {% if messages %}
@@ -19,7 +20,7 @@
     </div>
     {% endif %}
 
-    <div>
+    <!-- <div>
       <strong>Menu:</strong>
       <ul>
         {% if user.is_authenticated %}
@@ -30,11 +31,18 @@
         <li><a href="{% url 'account_signup' %}">Sign Up</a></li>
         {% endif %}
       </ul>
-    </div>
+    </div> -->
+    
     {% block content %}
     {% endblock %}
     {% endblock %}
     {% block extra_body %}
     {% endblock %}
+  </div>
+    <!-- Compiled and minified CSS -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css">
+
+<!-- Compiled and minified JavaScript -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/js/materialize.min.js"></script>
   </body>
 </html>
