@@ -35,8 +35,8 @@ def uploadSyllabus(request):
         instance = Subject(subject=request.POST['subject'], course_code=request.POST['course'], syll_file=request.FILES['myfile'])
         instance.save()
         url = instance.syll_file.url
-        instance = Subject.objects.update(syll_url=url)
-        
+        instance.syll_url = url
+        instance.save()
         return render(request, 'resources/syllabus.html', {
             'uploaded_file_url': url
         })
@@ -52,7 +52,8 @@ def uploadCAT1(request):
             instance = CAT1files(course=sub,  cat_1=request.FILES['myfile'])
             instance.save()
             url = instance.cat_1.url
-            instance = CAT1files.objects.update(cat_1_url=url)
+            instance.cat_1_url = url
+            instance.save()
             
             return render(request, 'resources/uploadcat1.html', {
                 'uploaded_file_url': url
@@ -62,7 +63,8 @@ def uploadCAT1(request):
             instance = CAT1files(course=sub1,  cat_1=request.FILES['myfile'])
             instance.save()
             url = instance.cat_1.url
-            instance = CAT1files.objects.update(cat_1_url=url)
+            instance.cat_1_url = url
+            instance.save()
             
             return render(request, 'resources/uploadcat1.html', {
                 'uploaded_file_url': url
@@ -80,7 +82,8 @@ def uploadCAT2(request):
             instance.save()
             print(instance.date)
             url = instance.cat_2.url
-            instance = CAT2files.objects.update(cat_2_url=url)
+            instance.cat_2_url = url
+            instance.save()
             
             return render(request, 'resources/uploadcat2.html', {
                 'uploaded_file_url': url
@@ -90,8 +93,9 @@ def uploadCAT2(request):
             instance = CAT2files(course=sub1,  cat_2=request.FILES['myfile'])
             instance.save()
             url = instance.cat_2.url
-            instance = CAT2files.objects.update(cat_2_url=url)
-            
+            instance.cat_2_url = url
+            instance.save()
+
             return render(request, 'resources/uploadcat2.html', {
                 'uploaded_file_url': url
             })
@@ -106,7 +110,8 @@ def uploadFAT(request):
             instance.save()
             print(instance.date)
             url = instance.fat_paper.url
-            instance = FATfiles.objects.update(fat_url=url)
+            instance.fat_url = url
+            instance.save()
             
             return render(request, 'resources/uploadfat.html', {
                 'uploaded_file_url': url
@@ -116,7 +121,8 @@ def uploadFAT(request):
             instance = FATfiles(course=sub1,  fat_paper=request.FILES['myfile'])
             instance.save()
             url = instance.fat_paper.url
-            instance = FATfiles.objects.update(fat_url=url)
+            instance.fat_url = url
+            instance.save()
             
             return render(request, 'resources/uploadfat.html', {
                 'uploaded_file_url': url
