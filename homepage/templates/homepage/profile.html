@@ -171,15 +171,6 @@
             <button class="btn btn-primary" type='submit'>Submit</button>
         </div>
     </form>
-    <br><br>
-    {% load i18n %}
-<form method="post" action="{% url 'account_logout' %}">
-  {% csrf_token %}
-  {% if redirect_field_value %}
-  <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}"/>
-  {% endif %}
-  <button type="submit" class="btn btn-info btn-lg">{% trans 'Sign Out' %}</button>
-</form>
 
 </div>
     <!-- Optional JavaScript -->
