@@ -40,9 +40,9 @@ class ClubAccount(models.Model):
     club_name       = models.CharField(null=False, default='', max_length=1000, primary_key=True)
     club_website    = models.URLField(null=True)
     ig_url          = models.URLField(null=True)
-    club_email      = models.EmailField(null=True, unique=True)
+    club_email      = models.EmailField(null=True, unique=True, blank=True)
     logo_url        = models.URLField(default='', null=True, blank=True)
-    club_logo       = models.ImageField(upload_to=path_and_rename_logos, default='', null=True, storage=gd_storage)
+    club_logo       = models.ImageField(upload_to=path_and_rename_logos, default='', null=True, storage=gd_storage, blank=True)
 
     def __str__(self):
         return self.club_name
@@ -56,7 +56,7 @@ class ClubEvent(models.Model):
     club_name       = models.ForeignKey(ClubAccount, on_delete=models.CASCADE, null=True)
     event_name      = models.CharField(max_length=100 ,default='', null=False, primary_key=True)
     event_desc      = models.TextField(default='', max_length=1000, null=True)
-    event_poster    = models.ImageField(upload_to=path_and_rename_events, default='', null=True, storage=gd_storage)
+    event_poster    = models.ImageField(upload_to=path_and_rename_events, default='', null=True, storage=gd_storage, blank=True)
     poster_url      = models.URLField(default='', null=True, blank=True)
     event_url       = models.URLField(default='', null=True)
 
@@ -88,7 +88,7 @@ class Recruitment(models.Model):
     club_name       = models.OneToOneField(ClubAccount, on_delete=models.CASCADE, null=False, primary_key=True)
     rec_date_time   = models.DateTimeField(null=True)
     rec_desc        = models.TextField(max_length=1000, default='', null=True)
-    recruit_poster  = models.ImageField(upload_to=path_and_rename_recs, default='', null=True, storage=gd_storage)
+    recruit_poster  = models.ImageField(upload_to=path_and_rename_recs, default='', null=True, storage=gd_storage, blank=True)
     poster_url      = models.URLField(default='', null=True, blank=True)
 
     def __str__(self):
@@ -102,7 +102,7 @@ class BigRecruitment(models.Model):
     club_name       = models.OneToOneField(ClubAccount, on_delete=models.CASCADE, null=False, primary_key=True)
     rec_date_time   = models.DateTimeField(null=True)
     rec_desc        = models.TextField(max_length=1000, default='', null=True)
-    poster          = models.ImageField(upload_to=path_and_rename_recs, default='', null=True, storage=gd_storage)
+    poster          = models.ImageField(upload_to=path_and_rename_recs, default='', null=True, storage=gd_storage, blank=True)
     poster_url      = models.URLField(default='', null=True, blank=True)
 
     def __str__(self):
