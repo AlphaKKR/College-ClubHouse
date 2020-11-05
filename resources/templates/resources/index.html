@@ -151,31 +151,35 @@
 
     <h1>Resources Downloads:</h1>
     {% for i in objects1 %}
+    {% if forloop.counter == 1 %}
+    {% else %}
 
     <a href="{{i.syll_url}}" style='font-size:25px'>{{i.subject}}</a>
-
+    <h5>Cat1 Papers:</h5>
     {% for j in objects2 %}
     <!-- <h4>{{j.course}},    {{i.course_code}}</h4> -->
     {% if j.course == i %}
-    <br> &#8287 &#8287 &#8287 &#8287 &#8287 &#8287 &#8287 &#8287
-    <a href="{{j.cat_1_url}}" style='font-size:25px'>CAT 1</a>
+    &#8287 &#8287 &#8287 &#8287 &#8287 &#8287 &#8287 &#8287
+    
+    <a href="{{j.cat_1_url}}" style='font-size:18px'>CAT 1</a>
     {% endif %}
     {% endfor %}
-
+    <h5>Cat2 Papers:</h5>
     {% for k in objects3 %}
-    <br> &#8287 &#8287 &#8287 &#8287 &#8287 &#8287 &#8287 &#8287
+    &#8287 &#8287 &#8287 &#8287 &#8287 &#8287 &#8287 &#8287
     {% if k.course == i %}
-    <a href="{{k.cat_2_url}}" style='font-size:25px'>CAT 2</a>
+    <a href="{{k.cat_2_url}}" style='font-size:18px'>CAT 2</a>
     {% endif %}
     {% endfor %}
-
+    <h5>Fat Papers:</h5>
     {% for l in objects4 %}
     {% if l.course == i %}
-    <br> &#8287 &#8287 &#8287 &#8287 &#8287 &#8287 &#8287 &#8287
-    <a href="{{l.fat_url}}" style='font-size:25px'>FAT</a>
+    &#8287 &#8287 &#8287 &#8287 &#8287 &#8287 &#8287 &#8287
+    <a href="{{l.fat_url}}" style='font-size:18px'>FAT</a>
     {% endif %}
     {% endfor %}
     <br><br>
+    {% endif %}
     {% endfor %}
 </body>
 

@@ -263,6 +263,10 @@
             display:flex;
             justify-content: space-evenly;
         }
+        .card{
+          width:30%!important;
+          margin:1.6%;
+        }
       </style>
 </head>
 
@@ -305,7 +309,7 @@
 
         <div class='row'>
             {% for i in objects %}
-            <div class="card col-sm-4 ml-2" style="width: 18rem;">
+            <div class="card" style="width: 18rem;">
                 <div class="card-body">
                   <h5 class="card-title">{{i.club_name}}</h5>
                   <p class="card-text">{{i.event_desc}}</p>
