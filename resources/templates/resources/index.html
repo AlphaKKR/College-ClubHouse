@@ -132,55 +132,58 @@
 
         </div>
     </nav>
-    <h1>Resources Uploads:</h1>
-    <div class="lis">
-        <a href="uploadsyll">Upload syllabus</a><br><br>
+    <h2 style='text-align: center;'>Upload Resources</h2>
+    <div class="container">
+        <div class="lis">
+            <a href="uploadsyll">Upload syllabus</a><br><br>
+        </div>
+        <div class="lis">
+            <a href="uploadcat1">CAT 1 Files Upload</a><br><br>
+
+        </div>
+        <div class="lis">
+            <a href="uploadcat2">CAT 2 Files Upload</a><br><br>
+
+        </div>
+        <div class="lis">
+            <a href="uploadfat">FAT Files Upload</a><br><br>
+
+        </div>
+    </div><br>
+    <h2>Resources Downloads</h2><br>
+    <div class="container">
+        {% for i in objects1 %}
+        {% if forloop.counter == 1 %}
+        {% else %}
+
+        <a href="{{i.syll_url}}" style='font-size:25px'>{{i.subject}}</a>
+        <h5>Cat1 Papers:</h5>
+        {% for j in objects2 %}
+        <!-- <h4>{{j.course}},    {{i.course_code}}</h4> -->
+        {% if j.course == i %}
+        &#8287 &#8287 &#8287 &#8287 &#8287 &#8287 &#8287 &#8287
+
+        <a href="{{j.cat_1_url}}" style='font-size:18px'>CAT 1</a>
+        {% endif %}
+        {% endfor %}
+        <h5>Cat2 Papers:</h5>
+        {% for k in objects3 %}
+        {% if k.course == i %}
+        &#8287 &#8287 &#8287 &#8287 &#8287 &#8287 &#8287 &#8287
+        <a href="{{k.cat_2_url}}" style='font-size:18px'>CAT 2</a>
+        {% endif %}
+        {% endfor %}
+        <h5>Fat Papers:</h5>
+        {% for l in objects4 %}
+        {% if l.course == i %}
+        &#8287 &#8287 &#8287 &#8287 &#8287 &#8287 &#8287 &#8287
+        <a href="{{l.fat_url}}" style='font-size:18px'>FAT</a>
+        {% endif %}
+        {% endfor %}
+        <br><br>
+        {% endif %}
+        {% endfor %}
     </div>
-    <div class="lis">
-        <a href="uploadcat1">CAT 1 Files Upload</a><br><br>
-
-    </div>
-    <div class="lis">
-        <a href="uploadcat2">CAT 2 Files Upload</a><br><br>
-
-    </div>
-    <div class="lis">
-        <a href="uploadfat">FAT Files Upload</a><br><br>
-
-    </div>
-
-    <h1>Resources Downloads:</h1>
-    {% for i in objects1 %}
-    {% if forloop.counter == 1 %}
-    {% else %}
-
-    <a href="{{i.syll_url}}" style='font-size:25px'>{{i.subject}}</a>
-    <h5>Cat1 Papers:</h5>
-    {% for j in objects2 %}
-    <!-- <h4>{{j.course}},    {{i.course_code}}</h4> -->
-    {% if j.course == i %}
-    &#8287 &#8287 &#8287 &#8287 &#8287 &#8287 &#8287 &#8287
-    
-    <a href="{{j.cat_1_url}}" style='font-size:18px'>CAT 1</a>
-    {% endif %}
-    {% endfor %}
-    <h5>Cat2 Papers:</h5>
-    {% for k in objects3 %}
-    &#8287 &#8287 &#8287 &#8287 &#8287 &#8287 &#8287 &#8287
-    {% if k.course == i %}
-    <a href="{{k.cat_2_url}}" style='font-size:18px'>CAT 2</a>
-    {% endif %}
-    {% endfor %}
-    <h5>Fat Papers:</h5>
-    {% for l in objects4 %}
-    {% if l.course == i %}
-    &#8287 &#8287 &#8287 &#8287 &#8287 &#8287 &#8287 &#8287
-    <a href="{{l.fat_url}}" style='font-size:18px'>FAT</a>
-    {% endif %}
-    {% endfor %}
-    <br><br>
-    {% endif %}
-    {% endfor %}
 </body>
 
 </html>
