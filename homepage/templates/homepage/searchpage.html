@@ -13,12 +13,41 @@
   <body>
       <h1>Search Results:</h1>
     <ul>
-    <li>{{allposts}}</li>
-    {% for obj in allposts %}
-
-        <li>{{obj.course_code}} <br> {{obj.subject}}</li>
+    
+    <h3>Papers</h3>
+    {% for obj in allposts %} 
+        <li>{{obj.subject}}  {{obj.course_code}}</li><br>
+        <ul>
+        {% for c1 in cat1 %}
+        <a href="{{c1.cat_1_url}}">Cat1 Paper</a>
+        <br>
+        {% endfor %}
+        {% for c2 in cat2 %}
+        <a href="{{c2.cat_2_url}}">Cat2 Paper</a>
+        <br>
+        {% endfor %}
+        {% for f in fat %}
+        <a href="{{f.fat_url}}">Cat2 Paper</a>
+        <br>
+        {% endfor %}
+        </ul>
         <br><br>
+        {% empty %}
+        <li> No matching results in Papers</li>
     {% endfor %}
+    
+
+    
+    <h3>Chatrooms</h3>
+    {% for k in chat %}
+    <ul>
+      <a href="/chatroom/{{k.name}}">{{k.name}}</a>
+    </ul>
+    {% empty %}
+    <li>No matching results in Chatrooms</li>
+    {% endfor %}
+    
+
     </ul>
     <!-- Optional JavaScript; choose one of the two! -->
 
