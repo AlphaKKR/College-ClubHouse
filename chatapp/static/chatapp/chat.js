@@ -60,7 +60,7 @@ $(function() {
     });
     
 
-    refreshTimer = setInterval(getMessages, 1500);
+    refreshTimer = setInterval(getMessages, 500);
 });
 
 $(document).ready(function() {
