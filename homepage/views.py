@@ -63,31 +63,23 @@ def Profile(request):
 
 def search(request): 
     if 'term' in request.GET:   
-        qs_subject_cat1 = CAT1.objects.annotate(search = SearchVector('subject', 'course_code'),).filter(search=request.GET.get('term'))
-        qs_course_cat1 = CAT1.objects.filter(course_code__icontains=request.GET.get('term'))
-        qs_subject_cat2 = CAT2.objects.filter(subject__icontains=request.GET.get('term'))
-        qs_course_cat2 = CAT2.objects.filter(course_code__icontains=request.GET.get('term'))
-        qs_subject_fat = FAT.objects.filter(subject__icontains=request.GET.get('term'))
-        qs_course_fat = FAT.objects.filter(course_code__icontains=request.GET.get('term'))
+        qs_subject = Subject.objects.filter(subject__icontains=request.GET.get('term'))
+        qs_course  = Subject.objects.filter(course_code__icontains=request.GET.get('term'))
+
+        queries = list()
+
+
         qs_clubs = ClubAccount.objects.filter(club_name__icontains=request.GET.get('term'))
         qs_chatrooms = Room.objects.filter(name__icontains=request.GET.get('term'))
 
-        queries_cat1 = qs_subject_cat1 | qs_course_cat1
-        queries_cat2 = qs_subject_cat2 | qs_course_cat2
-        queries_fat = qs_subject_fat | qs_course_fat
         queries = list()
+        for query in qs_subject:
+            queries.append(query.subject)
+            queries.append(query.course_code)
 
-        for query in queries_cat1:
-            queries.append(query.subject + ' CAT 1 papers')
-            queries.append(query.course_code + ' CAT 1 papers')
-        
-        for query in queries_cat2:
-            queries.append(query.subject + ' CAT 2 papers')
-            queries.append(query.course_code + ' CAT 2 papers')
-
-        for query in queries_fat:
-            queries.append(query.subject + ' FAT papers')
-            queries.append(query.course_code + ' FAT papers')
+        for query in qs_course:
+            queries.append(query.subject)
+            queries.append(query.course_code)
 
         for query in qs_clubs:
             queries.append(query.club_name)
