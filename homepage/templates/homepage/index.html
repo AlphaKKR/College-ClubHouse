@@ -132,7 +132,7 @@
                         id='{{form_action}}'>{{button_name}}</button>
                 </div>
             </form>
-            <form action="/signup/">
+            <form action="accounts/signup/">
                 <div>
                     <button class="srround btn b'width:100% btn-info mt-2" type="submit" id='signup'>Signup</button>
                 </div>
@@ -141,11 +141,11 @@
         {% if user.is_authenticated %}
         {% load i18n %}
         <form method="post" action="{% url 'account_logout' %}">
-          {% csrf_token %}
-          {% if redirect_field_value %}
-          <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}"/>
-          {% endif %}
-          <button type="submit" class=" srround btn btn-info b'width:100%tn-info mt-2">{% trans 'Sign Out' %}</button>
+            {% csrf_token %}
+            {% if redirect_field_value %}
+            <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+            {% endif %}
+            <button type="submit" class=" srround btn btn-info b'width:100%tn-info mt-2">{% trans 'Sign Out' %}</button>
         </form>
         {% endif %}
 
@@ -153,12 +153,12 @@
     </nav>
     <div>
         <br>
-        <form class="form-inline my-2 my-lg-0 justify-content-center mr-2 ml-2">
+        <form class="form-inline my-2 my-lg-0 justify-content-center mr-2 ml-2" method="get" action="searchpage/">
             <div class='row' style='width:100%'>
                 <div style='margin:auto'>
                     <span>
                         <input class="srround form-control mr-sm-2 " id='searchinput' type="search"
-                            style='margin-right:0px' placeholder="Search" aria-label="Search">
+                            style='margin-right:0px' placeholder="Search" aria-label="Search" name="term">
                     </span>
                     <span>
                         <button class="srround btn btn-outline-info my-sm-0 " id='searchbutton'
@@ -193,7 +193,7 @@
                         <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
                         <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
                     </ol>
-                    <div class="carousel-inner" role="listbox"  >
+                    <div class="carousel-inner" role="listbox">
                         <div class="carousel-item active">
                             <img class="d-block img-fluid"
                                 src="https://instagram.fhyd2-1.fna.fbcdn.net/v/t51.2885-15/sh0.08/e35/s750x750/122085311_362266871753846_3564106123590484037_n.jpg?_nc_ht=instagram.fhyd2-1.fna.fbcdn.net&_nc_cat=102&_nc_ohc=bGJ5fTMRPhcAX_W_py4&_nc_tp=24&oh=4c4c958e8b89bf173d9778f6352ecafc&oe=5FC254C2"
@@ -216,7 +216,19 @@
                     </a>
                 </div>
             </div>
-            <div class="col-lg-2">
+            <div class="col-lg-4">
+
+                <h4 class="my-4">Active Rooms</h4>
+                <div class="list-group">
+                    {% for k in objects %}
+                    {% if forloop.counter < 6 %}
+                    <a href="/chatroom/{{k.name}}" class="list-group-item">{{k.name}}</a>
+                    {% endif %}
+                    {% endfor %}
+                </div>
+
+            </div>
+            <!-- <div class="col-lg-2">
 
                 <h4 class="my-4">Shop Name</h4>
                 <div class="list-group">
@@ -225,17 +237,7 @@
                     <a href="#" class="list-group-item">Category 3</a>
                 </div>
 
-            </div>
-            <div class="col-lg-2">
-
-                <h4 class="my-4">Shop Name</h4>
-                <div class="list-group">
-                    <a href="#" class="list-group-item">Category 1</a>
-                    <a href="#" class="list-group-item">Category 2</a>
-                    <a href="#" class="list-group-item">Category 3</a>
-                </div>
-
-            </div>
+            </div> -->
         </div>
         <div class="row">
             <div class="col-lg-4 col-md-6 mb-4">
@@ -243,9 +245,8 @@
                     <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
                     <div class="card-body">
                         <h4 class="card-title">
-                            <a href="#">Item One</a>
+                            <a href="#">Event One</a>
                         </h4>
-                        <h5>$24.99</h5>
                         <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet
                             numquam aspernatur!</p>
                     </div>
@@ -260,9 +261,8 @@
                     <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
                     <div class="card-body">
                         <h4 class="card-title">
-                            <a href="#">Item Two</a>
+                            <a href="#">Event Two</a>
                         </h4>
-                        <h5>$24.99</h5>
                         <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet
                             numquam aspernatur! Lorem ipsum dolor sit amet.</p>
                     </div>
@@ -277,9 +277,8 @@
                     <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
                     <div class="card-body">
                         <h4 class="card-title">
-                            <a href="#">Item Three</a>
+                            <a href="#">Event Three</a>
                         </h4>
-                        <h5>$24.99</h5>
                         <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet
                             numquam aspernatur!</p>
                     </div>
@@ -294,9 +293,8 @@
                     <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
                     <div class="card-body">
                         <h4 class="card-title">
-                            <a href="#">Item Four</a>
+                            <a href="#">Event Four</a>
                         </h4>
-                        <h5>$24.99</h5>
                         <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet
                             numquam aspernatur!</p>
                     </div>
@@ -311,9 +309,8 @@
                     <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
                     <div class="card-body">
                         <h4 class="card-title">
-                            <a href="#">Item Five</a>
+                            <a href="#">Event Five</a>
                         </h4>
-                        <h5>$24.99</h5>
                         <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet
                             numquam aspernatur! Lorem ipsum dolor sit amet.</p>
                     </div>
@@ -328,9 +325,8 @@
                     <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
                     <div class="card-body">
                         <h4 class="card-title">
-                            <a href="#">Item Six</a>
+                            <a href="#">Event Six</a>
                         </h4>
-                        <h5>$24.99</h5>
                         <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet
                             numquam aspernatur!</p>
                     </div>

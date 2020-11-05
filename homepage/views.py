@@ -13,7 +13,7 @@ def index(request):
         return render(request, 'homepage/index.html', {'form_action': 'login', 'button_name': 'Login'})
     else:
         # print(CAT1.objects.filter(course_code='cse1002'))
-        return render(request, 'homepage/index.html', {'form_action': 'profile', 'button_name': 'Profile'})
+        return render(request, 'homepage/index.html', {'form_action': 'profile', 'button_name': 'Profile','objects': Room.objects.all()})
 
 def Profile(request):
     user_data = {
@@ -22,7 +22,7 @@ def Profile(request):
             'username': request.user.username,
             'email': request.user.email,
         }
-    print(request.user.username)
+    # print(request.user.username)
     if not request.user.is_anonymous:
         if request.method == 'POST':
             time_table = request.POST.get('timetable')
@@ -63,12 +63,12 @@ def Profile(request):
 
 def search(request): 
     if 'term' in request.GET:   
-        qs_subject_cat1 = CAT1.objects.annotate(search = SearchVector('subject', 'course_code'),).filter(search=request.GET.get('term'))
-        qs_course_cat1 = CAT1.objects.filter(course_code__icontains=request.GET.get('term'))
-        qs_subject_cat2 = CAT2.objects.filter(subject__icontains=request.GET.get('term'))
-        qs_course_cat2 = CAT2.objects.filter(course_code__icontains=request.GET.get('term'))
-        qs_subject_fat = FAT.objects.filter(subject__icontains=request.GET.get('term'))
-        qs_course_fat = FAT.objects.filter(course_code__icontains=request.GET.get('term'))
+        qs_subject_cat1 = CAT1files.objects.annotate(search = SearchVector('subject', 'course_code'),).filter(search=request.GET.get('term'))
+        qs_course_cat1 = CAT1files.objects.filter(course_code__icontains=request.GET.get('term'))
+        qs_subject_cat2 = CAT2files.objects.filter(subject__icontains=request.GET.get('term'))
+        qs_course_cat2 = CAT2files.objects.filter(course_code__icontains=request.GET.get('term'))
+        qs_subject_fat = FATfiles.objects.filter(subject__icontains=request.GET.get('term'))
+        qs_course_fat = FATfiles.objects.filter(course_code__icontains=request.GET.get('term'))
         qs_clubs = ClubAccount.objects.filter(club_name__icontains=request.GET.get('term'))
         qs_chatrooms = Room.objects.filter(name__icontains=request.GET.get('term'))
 
@@ -96,3 +96,22 @@ def search(request):
             queries.append(query.name)
 
         return JsonResponse(queries, safe=False)
+
+def SearchPage(request):
+    if 'term' in request.GET:
+        qs_subject = Subject.objects.filter(subject__istartswith=request.GET.get('term'))
+        qs_subject_cat1 = CAT1files.objects.filter(subject__istartswith=request.GET.get('term'))
+        qs_course_cat1 = CAT1files.objects.filter(course_code__istartswith=request.GET.get('term'))
+        qs_subject_cat2 = CAT2files.objects.filter(subject__istartswith=request.GET.get('term'))
+        qs_course_cat2 = CAT2files.objects.filter(course_code__istartswith=request.GET.get('term'))
+        qs_subject_fat = FATfiles.objects.filter(subject__istartswith=request.GET.get('term'))
+        qs_course_fat = FATfiles.objects.filter(course_code__istartswith=request.GET.get('term'))
+        qs_clubs = ClubAccount.objects.filter(club_name__istartswith=request.GET.get('term'))
+        qs_chatrooms = Room.objects.filter(name__istartswith=request.GET.get('term'))
+
+        queries_cat1 = qs_subject_cat1 | qs_course_cat1
+        queries_cat2 = qs_subject_cat2 | qs_course_cat2
+        queries_fat = qs_subject_fat | qs_course_fat
+        queries = list(chain(queries_cat1,queries_cat2,queries_fat))
+    param = {"allposts": queries}
+    return render(request, 'homepage/searchpage.html',param)
