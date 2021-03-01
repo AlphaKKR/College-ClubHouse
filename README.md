@@ -1,9 +1,10 @@
 # AClubHouse for our College (Still under development)
 ### Screenshots:
-<img src="https://github.com/wolf-hash/College-ClubHouse/blob/master/Screenshots/clubhouse.png" width="1280" height="720" />
-<img src="https://github.com/wolf-hash/College-ClubHouse/blob/master/Screenshots/resources.png" width="1280" height="720" />
-<img src="https://github.com/wolf-hash/College-ClubHouse/blob/master/Screenshots/chatrooms.png" width="1280" height="720" />
-<img src="https://github.com/wolf-hash/College-ClubHouse/blob/master/Screenshots/chatrooms1.png" width="1280" height="720" />
+![Homepage](https://github.com/wolf-hash/College-ClubHouse/blob/master/Screenshots/clubhouse.png)
+![Resources page](https://github.com/wolf-hash/College-ClubHouse/blob/master/Screenshots/resources.png)
+![Chatroom](https://github.com/wolf-hash/College-ClubHouse/blob/master/Screenshots/chatrooms.png)
+![Chatroom](https://github.com/wolf-hash/College-ClubHouse/blob/master/Screenshots/chatrooms1.png)
+
 
 ## Build Yourself
 ```
