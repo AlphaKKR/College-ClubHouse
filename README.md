@@ -1,4 +1,4 @@
-# AClubHouse for our College (Still under development)
+# A ClubHouse for our College (Still under development)
 ### Screenshots:
 ![Homepage](https://github.com/wolf-hash/College-ClubHouse/blob/master/Screenshots/clubhouse.png)
 ![Resources page](https://github.com/wolf-hash/College-ClubHouse/blob/master/Screenshots/resources.png)
