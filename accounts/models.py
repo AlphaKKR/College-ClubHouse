@@ -29,7 +29,7 @@ def send_reset_password_email(sender, instance, created, **kwargs):
             'email': instance.email,
             'csrfmiddlewaretoken': get_token(HttpRequest())
         }
-        PasswordResetView.as_view()(request)  # email will be sent!
+        PasswordResetView.as_view()(request)  # email will be sent! 
 
 class UserAccountManager(BaseUserManager):
     def create_user(self, email, username, password=None, timetable=None):
