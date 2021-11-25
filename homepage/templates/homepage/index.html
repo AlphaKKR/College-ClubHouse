@@ -82,11 +82,24 @@
 
 
         .news {
-            border: solid black 1px;
+            overflow: hidden;
             border-radius: 8px;
-            background: #cdcfd2;
-            box-shadow: 1px 3px #888888;
+            background:#eeeeee;
+            display: flex;
+            justify-content: center;
+            align-content: center;
+            flex-direction: column;
+        }
 
+        .caraousel-item {
+            overflow: hidden !important;
+            border-radius: 15px !important;
+        }
+
+        .carousel-inner {
+            border-radius: 25px;
+            background-color: rgba(0, 0, 0, 0);
+            overflow: hidden;
         }
     </style>
 </head>
@@ -172,14 +185,33 @@
     <div class="container">
 
         <div class="row">
+            <div class="col-lg-3 my-4" >
+                <div class="news" style = 'border-radius: 15px 15px 0 0; '>
+                    <h4 style='overflow: hidden;margin-bottom:0; background-color: #2980B9; color:white; font-weight: 800; text-align: center; height: 4rem; display:flex; justify-content: center; align-content: center;
+                    flex-direction: column ;'>News Bulletin</h4>
+                </div>
 
-            <div class="col-lg-2 my-4 news">
+                <div class="list-group news" style='border: 2px solid #2980B9; padding: 8px;border-radius:  0 0 15px 15px;'>
+                    <li href="#" class='my-1'
+                        style="list-style-type: none; text-align:center ;display: flex;justify-content: center;align-content: center;flex-direction: column;">
+                        Welcome Vit ClubHouse</li>
+                    <div class='my-2' style="border: 1px solid #2980B9;">
+                    </div>
+                    <li href="#" style="list-style-type: none">Notice! Finals start from 15 Dec</li>
+                    <div class='my-2' style="border: 1px solid #2980B9;">
+                    </div>
 
-                <h4 class="my-4">News Bulletin</h4>
-                <div class="list-group">
-                    <li href="#" style="list-style-type: none">Welcome Vit ClubHouse</li><br>
-                    <li href="#" style="list-style-type: none">Enjoy the University experience online</li><br>
-                    <li href="#" style="list-style-type: none">News Articles</li>
+                    <li href="#" style="list-style-type: none">Notice! IWP review 3 is today</li>
+                    <div class='my-2' style="border: 1px solid #2980B9;">
+                    </div>
+
+                    <li href="#" style="list-style-type: none">Notice! ReCAT for freshers, Link has been enabled on VTOP
+                    </li>
+                    <div class='my-2' style="border: 1px solid #2980B9;">
+                    </div>
+
+                    <li href="#" style="list-style-type: none">Notice! Universtiy might open in Jan</li>
+
                 </div>
 
             </div>
@@ -195,9 +227,7 @@
                     </ol>
                     <div class="carousel-inner" role="listbox">
                         <div class="carousel-item active">
-                            <img class="d-block img-fluid"
-                                src="media/first"
-                                alt="First slide">
+                            <img class="d-block img-fluid" src="media/first" alt="First slide">
                         </div>
                         <div class="carousel-item">
                             <img class="d-block img-fluid" src="media/second" alt="Second slide">
@@ -216,15 +246,17 @@
                     </a>
                 </div>
             </div>
-            <div class="col-lg-4">
+            <div class="col-lg-3 my-4" style='text-align: center'>
 
-                <h4 class="my-4">Active Rooms</h4>
-                <div class="list-group">
+                <div class="news" style = 'border-radius: 15px 15px 0 0; '>
+                    <h4 style='overflow: hidden;margin-bottom:0; background-color: #2980B9; color:white; font-weight: 800; text-align: center; height: 4rem; display:flex; justify-content: center; align-content: center;
+                    flex-direction: column ;'>News Bulletin</h4>
+                </div>
+                <div class="list-group " style = 'border-radius:  0 0 15px 15px;'>
                     {% for k in objects %}
-                    {% if forloop.counter < 6 %}
-                    <a href="/chatroom/{{k.name}}" class="list-group-item">{{k.name}}</a>
-                    {% endif %}
-                    {% endfor %}
+                    {% if forloop.counter < 6 %} <a href="/chatroom/{{k.name}}" class="list-group-item">{{k.name}}</a>
+                        {% endif %}
+                        {% endfor %}
                 </div>
 
             </div>
