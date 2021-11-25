@@ -10,9 +10,15 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
         integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
     <title>Resources</title>
 
     <style>
+        body {
+            font-family: 'Epilogue', sans-serif;
+        }
+
         .ui-autocomplete {
             position: absolute;
             top: 0;
@@ -90,17 +96,39 @@
         }
 
         .lis {
-            border: solid grey 1px;
-            margin: 1px 4px 1px 4px;
-            padding-left: 3px;
+            border-radius: 15px;
+            display: flex;
+            width: 700px;
+            justify-content: center;
+            align-content: center;
+            flex-direction: column;
+            background-color: #eeeeee;
+            margin: 10px auto;
+            padding-left: 30px;
+            height: 4rem;
             font-size: 25px;
+        }
+
+        .lis1 {
+            border-radius: 8px;
+            display: flex;
+            width: 700px;
+            justify-content: center;
+            align-content: center;
+            flex-direction: column;
+            background-color: #eeeeee;
+            margin: 10px auto;
+            padding-left: 30px;
         }
     </style>
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top">
-        <a class=" navbar-brand" href="/">ClubHouse</a>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top"
+        style='color: white !important; background-color: #2980B9!important;'>
+        <a class=" navbar-brand" style="color:white; font-weight: 800; font-size: 1.5rem; padding-top: 1px;"
+            href="/">ClubHouse</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -109,7 +137,7 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                    <a class="nav-link dropdown-toggle" style="color:white" href="#" id="navbarDropdown" role="button"
                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Clubs and Chapters
                     </a>
@@ -121,66 +149,78 @@
                     </div>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/resources/">Resources</a>
+                    <a class="nav-link" href="/resources/" style="color:white">Resources</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/chatroom/">Chatroom</a>
+                    <a class="nav-link" style="color:white" href="/chatroom/">Chatroom</a>
                 </li>
 
             </ul>
+
         </div>
+        {% if user.is_authenticated %}
+        {% load i18n %}
+        <form method="post" action="{% url 'account_logout' %}">
+            {% csrf_token %}
+            {% if redirect_field_value %}
+            <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+            {% endif %}
+            <button type="submit" class=" srround btn btn-info b'width:100%tn-info mt-2">{% trans 'Sign Out' %}</button>
+        </form>
+        {% endif %}
 
         </div>
     </nav>
-    <h2 style='text-align: center;'>Upload Resources</h2>
+
+
+    <h2 style='text-align: center; color: #2980b9; font-weight: 800; margin-top: 40px;'>Upload Resources</h2>
     <div class="container">
         <div class="lis">
-            <a href="uploadsyll">Upload syllabus</a><br><br>
+            <a href="uploadsyll">Upload syllabus</a>
         </div>
         <div class="lis">
-            <a href="uploadcat1">CAT 1 Files Upload</a><br><br>
+            <a href="uploadcat1">CAT 1 Files Upload</a>
 
         </div>
         <div class="lis">
-            <a href="uploadcat2">CAT 2 Files Upload</a><br><br>
+            <a href="uploadcat2">CAT 2 Files Upload</a>
 
         </div>
         <div class="lis">
-            <a href="uploadfat">FAT Files Upload</a><br><br>
+            <a href="uploadfat">FAT Files Upload</a>
 
         </div>
     </div><br>
-    <h2>Resources Downloads</h2><br>
+    <h2 style='text-align: center; color: #2980b9; font-weight: 800; margin-top: 15px;'>Resource Downloads</h2>
     <div class="container">
         {% for i in objects1 %}
         {% if forloop.counter == 1 %}
         {% else %}
 
-        <a href="{{i.syll_url}}" style='font-size:25px'>{{i.subject}}</a>
-        <h5>Cat1 Papers:</h5>
+        <a href="{{i.syll_url}}" class='lis' style='font-size:25px;'>{{i.subject}}</a>
+
+        <h5 class='lis1' style='font-weight: 800; height: 2rem;'>CAT 1 Papers:</h5>
         {% for j in objects2 %}
         <!-- <h4>{{j.course}},    {{i.course_code}}</h4> -->
         {% if j.course == i %}
-        &#8287 &#8287 &#8287 &#8287 &#8287 &#8287 &#8287 &#8287
 
-        <a href="{{j.cat_1_url}}" style='font-size:18px'>CAT 1</a>
+
+        <a href="{{j.cat_1_url}}" class='lis1' style='font-size: 15px; background-color: white;'>CAT 1</a>
         {% endif %}
         {% endfor %}
-        <h5>Cat2 Papers:</h5>
+        <h5 class='lis1' style='font-weight: 800; height: 2rem;'>CAT 2 Papers:</h5>
         {% for k in objects3 %}
         {% if k.course == i %}
-        &#8287 &#8287 &#8287 &#8287 &#8287 &#8287 &#8287 &#8287
-        <a href="{{k.cat_2_url}}" style='font-size:18px'>CAT 2</a>
+        <a href="{{k.cat_2_url}}" class='lis1' style='font-size: 15px; background-color: white;'
+            style='font-size:18px'>CAT 2</a>
         {% endif %}
         {% endfor %}
-        <h5>Fat Papers:</h5>
+        <h5 class='lis1' style='font-weight: 800; height: 2rem;'>FAT Papers:</h5>
         {% for l in objects4 %}
         {% if l.course == i %}
-        &#8287 &#8287 &#8287 &#8287 &#8287 &#8287 &#8287 &#8287
-        <a href="{{l.fat_url}}" style='font-size:18px'>FAT</a>
+        <a href="{{l.fat_url}}" class='lis1' style='font-size: 15px;background-color: white; style='font-size:18px'>FAT</a>
         {% endif %}
         {% endfor %}
-        <br><br>
         {% endif %}
         {% endfor %}
     </div>

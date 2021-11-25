@@ -110,8 +110,8 @@
 
 
     <!-- Navigation -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top">
-        <a class=" navbar-brand" href="/">ClubHouse</a>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top" style = 'color: white !important; background-color: #2980B9!important;'>
+        <a class=" navbar-brand" style = "color:white; font-weight: 800; font-size: 1.5rem; padding-top: 1px;" href="/">ClubHouse</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -120,34 +120,34 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                    <a class="nav-link dropdown-toggle" style = "color:white"href="#" id="navbarDropdown" role="button"
                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Clubs and Chapters
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="/clubs">Club Info</a>
+                        <a class="dropdown-item"  href="/clubs">Club Info</a>
                         <a class="dropdown-item" href="/clubs/events">Events</a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="/clubs/recruitments/">Recruitments</a>
+                        <a class="dropdown-item" href="/clubs/recruitments/" >Recruitments</a>
                     </div>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/resources/">Resources</a>
+                    <a class="nav-link" href="/resources/" style = "color:white">Resources</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/chatroom/">Chatroom</a>
+                    <a class="nav-link" style = "color:white" href="/chatroom/">Chatroom</a>
                 </li>
 
             </ul>
             <form action="/accounts/{{form_action}}/">
                 <div>
-                    <button class="srround btn btn-primary mr-2 mt-2" type="submit"
+                    <button class="srround btn btn-info mr-2 "  type="submit"
                         id='{{form_action}}'>{{button_name}}</button>
                 </div>
             </form>
             <form action="accounts/signup/">
                 <div>
-                    <button class="srround btn b'width:100% btn-info mt-2" type="submit" id='signup'>Signup</button>
+                    <button class="srround btn b'width:100% btn-info " type="submit"  id='signup'>Signup</button>
                 </div>
             </form>
         </div>
@@ -250,11 +250,11 @@
 
                 <div class="news" style = 'border-radius: 15px 15px 0 0; '>
                     <h4 style='overflow: hidden;margin-bottom:0; background-color: #2980B9; color:white; font-weight: 800; text-align: center; height: 4rem; display:flex; justify-content: center; align-content: center;
-                    flex-direction: column ;'>News Bulletin</h4>
+                    flex-direction: column ;'>Active Rooms</h4>
                 </div>
-                <div class="list-group " style = 'border-radius:  0 0 15px 15px;'>
+                <div class="list-group " style = 'border-radius:  0 0 15px 15px; '>
                     {% for k in objects %}
-                    {% if forloop.counter < 6 %} <a href="/chatroom/{{k.name}}" class="list-group-item">{{k.name}}</a>
+                    {% if forloop.counter < 6 %} <a href="/chatroom/{{k.name}}"  style = 'background-color: #eeeeee' class="list-group-item">{{k.name}}</a>
                         {% endif %}
                         {% endfor %}
                 </div>
